@@ -8,7 +8,7 @@ Vagrant.configure("2") do |test|
  end
  
  test.vm.define "webserver" do |web|
-   web.vm.hostname = "mwiws01"
+   web.vm.hostname = "myws01"
    web.vm.box = "geerlingguy/centos7"
    web.vm.network :private_network, ip: "192.168.10.10"
    web.vm.network "forwarded_port", guest: "80", host: "8080"
