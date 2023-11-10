@@ -98,29 +98,19 @@
       shell: "cp /etc/mime.types /etc/httpd/conf/mime.types"
       when: mimeout is failed
 
-    - name: Download the home page of www.middlewareinventory.com to tmp
-      tags:
-        - web
+    - name: Copy Index file
       become: yes
       become_user: root
-      shell: 
-        wget http://www.mwinventory.in
-      args:
-        chdir: "/tmp"
-        creates: "index.html"
-
-    - name : Changing file permission of downloaded index.html and copy to DocRoot
       tags:
         - web
-      become: yes
-      become_user: root
-      copy:
-        remote_src: yes
-        src: "/tmp/index.html"
-        dest: "{{docroot}}/index.html"
-        owner: apache
-        group: apache
+      template:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        owner: root
+        group: root
         mode: 0755
+      with_items:
+        - {src: 'index.html.j2', dest: '{{ docroot }}/index.html'}
 
     - name: Make Sure the Apache is Running
       tags:
