@@ -14,7 +14,8 @@ Vagrant.configure("2") do |test|
    web.vm.network "forwarded_port", guest: "80", host: "8080"
    web.vm.synced_folder "./shared", "/shared"
    
-   #Provision the webserver with Ansible
+   # Provision the webserver with Ansible (this section will be later removed 
+   # so that once the machine is up we can test the playbook execution)
    web.vm.provision "ansible" do |ansible|
      ansible.playbook="apache-playbook.yaml"
    end
