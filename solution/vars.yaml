@@ -1,0 +1,4 @@
+#Define the Variables for Playbook this is vars.yml
+
+domain: "mydomain.com"
+docroot: "/shared"
